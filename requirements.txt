@@ -1,0 +1,10 @@
+flask
+sqlalchemy
+Flask-SQLAlchemy
+pytest
+dulwich
+python-git-secrets
+safety
+bandit
+python-taint
+pylint
