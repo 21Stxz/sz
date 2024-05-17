@@ -5,7 +5,6 @@ set -e
 
 SRC_DIRECTORY="$(pwd)"
 # Définition des chemins
-SRC_DIRECTORY="/var/lib/jenkins/workspace/TP8PIPELINE"
 REPORT_DIRECTORY="$SRC_DIRECTORY/report"
 IGNORE_FILE="$SRC_DIRECTORY/bandit.ignore"
 RESULT_FILE="$REPORT_DIRECTORY/banditResult.json"
