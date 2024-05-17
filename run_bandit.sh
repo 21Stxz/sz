@@ -4,6 +4,8 @@ set +e
 SRC_DIRECTORY="$(pwd)"
 REPORT_DIRECTORY="$SRC_DIRECTORY/report"
 BANDIT_IMAGE="secfigo/bandit:latest"
+IGNORE_FILE="/src/bandit.ignore"
+RESULT_FILE="$REPORT_DIRECTORY/banditResult.json"
 
 if [ ! -d "$REPORT_DIRECTORY" ]; then
     echo "Initially creating persistent directories"
@@ -22,7 +24,13 @@ if [ $? -eq 0 ]; then
     docker run --rm \
         --volume "$SRC_DIRECTORY":/src \
         --volume "$REPORT_DIRECTORY":/report \
-        "$BANDIT_IMAGE"
+        "$BANDIT_IMAGE" bandit -r -f json -o "$RESULT_FILE" /src
+    # Check if Bandit command was successful
+    if [ $? -eq 0 ]; then
+        echo "Bandit tests completed successfully."
+    else
+        echo "Bandit tests failed."
+    fi
 else
     echo "Failed to download the Bandit Docker image."
     exit 1
